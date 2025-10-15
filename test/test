@@ -1,0 +1,9 @@
+o
+oopppppp
+#include <stdio.h>
+
+unsigned char gr(unsigned char fe,hw,lab) { 
+    return 0.5*fe + 0.6*hw + 0.7*lab; 
+}
+int main (int argc,char ** argv)
+ if 
