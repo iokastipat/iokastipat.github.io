@@ -1,2 +1,2 @@
-# progintro-hw0--iokastipat-
+# iokastipat.github.io
 Hello. This is my first repository. I hope you like it.
