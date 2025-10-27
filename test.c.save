@@ -9,7 +9,7 @@ int main() {
    printf("Please,second number:" );
    scanf("%d" , &n2 );
    fflush(stdout);
-   printf("The sum of those 2 numbers is : %d\n" , (n1 + n2) );
+   printf("The sum of those 2 numbers is : %d\n" (n1 + n2) );
    return 0; 
 }
 
