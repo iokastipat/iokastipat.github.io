@@ -1,1 +1,94 @@
-.
+// File: aliquot.c
+// Complie with gcc -O0 -m32 -Wall -Wextra -Werror -pedantic -o aliquot aliquot.c
+
+
+#include <stdio.h>
+
+long long sum(long long number ) { // Function to calculate the sum of proper divisors
+    long long sum = 0;
+
+    for ( int i = 1; i <= number/2; i++ ) { // Loop to calculate proper divisors
+        if (number % i == 0) { //Is it a proper divisor?
+                sum += i;
+            }
+        }
+
+
+    if (sum < 1000000000000000) { // Check for maximum supported integer
+        return sum;
+     } else {
+        return 1000000000000000; // Indicating overflow
+     } 
+}
+
+    int main() {
+    long long main_number; // Not just int,to support numbers up to 1000000000000000
+    int max_length;
+    char choice;
+    long long secondary;
+    int random_variable =1; // Variable to start and end the loop 
+    int c1 = 0; // Counter in case the user wants to print out the length of the sequence 
+
+
+    printf("Please give the number to start the aliquot sequence from:"); // Prompting user for input
+    scanf("%lld", &main_number);
+    if ( main_number <= 0 || main_number > 1000000000000000 ) { //Checking invalid input 
+            printf("Invalid input number. Stopping.\n");
+            return 1;  
+        }
+
+
+    printf("Provide the max aliquot length to look for(0 for unlimited):");
+    scanf("%d", &max_length);
+
+
+    printf("Do you want to print the full sequence ('f') or just the length ('l')?");
+    scanf(" %c", &choice);
+
+
+        if ( choice == 'f') { // Prints the first number of the sequence based on the user's choice
+                printf("%lld\n" , main_number); }
+            secondary = main_number; // The first number of the sequence is assigned into another variable in order to change it repeatdly 
+
+
+        while ( random_variable != 0 ) { // Main loop to calculate the aliquot sequence
+            long long sum_result = sum(secondary); // Calls the function to calculate the proper divisors of "secondary"
+            c1++;
+
+            if (sum_result == 1000000000000000) { // Handling overflow scenario
+                random_variable = 0;
+                printf("Number exceeds maximum supported integer (1000000000000000). Stopping\n");
+            }else {
+
+                if (max_length==c1 && max_length!=0) { // Checking for maximum length condition
+                     random_variable = 0;
+                 if (choice == 'l') {
+                    printf("%d\n", c1);
+                } else if (choice == 'f') {
+                    printf("%lld\n", sum_result);
+                   }  
+
+                } else { // Continuing the sequence calculation 
+                 if ( choice == 'f') {
+                        printf("%lld\n ",sum_result);
+                    }   
+                    secondary = sum_result; // Calls the function again to continue the loop
+
+                    if (secondary == 0) { // Stopping condition for reaching 0
+                        if (choice == 'l') { //Prints c1 as in the length of the sequnce
+                            printf("%d\n", c1);
+                            random_variable = 0; // Stops the loop
+                                            }
+                        else if (choice == 'f') { // Stops the loop
+                            random_variable = 0;
+                         }
+                }
+                    }
+                }
+            }
+    
+    return 0;
+}
+
+
+     
